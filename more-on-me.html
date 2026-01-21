@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More On Me - Azhad Al-Hadi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #0a0a0a;
+            --font-color-main: #ffffff;
+            --accent-orange: #ff6b00;
+            --card-color: #eaeaea;
+            --line-color: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1.1px);
+            background-size: 30px 30px;
+            color: var(--font-color-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+
+        .btn-back {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid #333;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        #hero-section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            position: relative;
+            width: 100%;
+        }
+
+        .left-content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+            margin-left: 60px;
+        }
+
+        h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.8rem;
+            line-height: 1.3;
+            font-weight: 400;
+        }
+
+        .text-orange {
+            color: var(--accent-orange);
+            font-weight: bold;
+        }
+
+        .text-underline {
+            text-decoration: underline;
+            text-decoration-color: var(--accent-orange);
+            text-underline-offset: 5px;
+        }
+
+        .floating-icon {
+            position: absolute;
+            background: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            z-index: 10;
+        }
+
+        .floating-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .pos-asterisk {
+            top: -80px;
+            left: 0;
+        }
+        
+        .pos-talk { 
+            top: 100px;
+            left: -160px; 
+            width: auto;
+            padding: 0 20px;
+            font-weight: bold;
+            color: #000; 
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9em;
+        }
+
+        .pos-mail {
+            bottom: -100px;
+            left: 30px;
+        }
+
+        .pos-youtube {
+            bottom: -130px;
+            left: 150px;
+        }
+
+        .pos-toggle {
+            bottom: -60px;
+            left: 250px;
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .lines-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .circuit-line {
+            position: absolute;
+            background-color: #333;
+        }
+
+        .line-vertical-main { 
+            width: 1px;
+            height: 380px;
+            left: 25px;
+            top: -30px;
+        }
+
+        .line-horizontal-talk {
+            height: 1px;
+            width: 160px;
+            left: -135px;
+            top: 125px;
+        }
+
+        .line-horizontal-bottom {
+            width: 250px;
+            height: 1px;
+            left: 25px;
+            bottom: -50px;
+        }
+        
+        .line-vertical-small {
+            height: 80px;
+            width: 1px;
+            left: 175px;
+            bottom: -130px;
+        }
+
+        .right-content {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .photo-frame {
+            width: 300px;
+            height: 400px;
+            border: 2px solid #fff;
+            border-radius: 20px;
+            padding: 5px;
+            background: rgba(255,255,255,0.05);
+            transform: rotate(3deg);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        #cards-section {
+            padding: 100px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .info-card {
+            background-color: var(--card-color);
+            color: #111;
+            border-radius: 30px;
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 30px;
+            min-height: 300px;
+        }
+
+        .card-details {
+            flex: 1;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+        }
+
+        .info-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .info-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .img-climbing {
+            width: 200px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            transform: rotate(-3deg);
+            border: 4px solid #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .youtube-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .img-preview {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            display: block;
+        }
+
+        .img-pfp-overlay {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+        }
+
+        .link-channel {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #555;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link-channel:hover {
+            text-decoration: underline;
+            color: red;
+        }
+
+        @media (max-width: 900px) {
+            .layout-grid { grid-template-columns: 1fr; text-align: center; }
+            .left-content { margin-left: 0; margin-bottom: 50px; margin-top: 50px; }
+            .right-content { justify-content: center; }
+            .lines-container { display: none; }
+            .floating-icon { position: relative; top: auto; left: auto; right: auto; bottom: auto; display: inline-flex; margin: 10px; }
+            .info-card { flex-direction: column-reverse; }
+            .img-climbing, .youtube-container { width: 100%; max-width: 300px; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="btn-back">← Back</a>
+    </nav>
+
+    <section id="hero-section">
+        <div class="layout-grid">
+            
+            <div class="left-content">
+                
+                <div class="lines-container">
+                    <div class="circuit-line line-vertical-main"></div>
+                    <div class="circuit-line line-horizontal-talk"></div>
+                    <div class="circuit-line line-horizontal-bottom"></div>
+                    <div class="circuit-line line-vertical-small"></div>
+                </div>
+
+                <div class="floating-icon pos-asterisk">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/></svg>
+                </div>
+
+                <h1>
+                    <span class="text-orange">Hey!</span> Im Azhad<br>
+                    Aspiring Programmer<br>
+                    based from <span class="text-underline">earth[r]</span>.
+                </h1>
+
+                <a href="#" class="floating-icon pos-talk">Let's talk</a>
+                
+                <a href="mailto:azhadhzr@gmail.com" class="floating-icon pos-mail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#d32f2f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </a>
+
+                <a href="https://www.youtube.com/@TheGuidedDeen1" target="_blank" class="floating-icon pos-youtube">
+                    <svg viewBox="0 0 24 24" fill="#FF0000" stroke="none"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+
+                <div class="floating-icon pos-toggle">
+                     <div style="width: 50px; height: 26px; background: #ff6b00; border-radius: 15px; position: relative;">
+                         <div style="width: 22px; height: 22px; background: #fff; border-radius: 50%; position: absolute; top: 2px; left: 2px;"></div>
+                     </div>
+                </div>
+
+            </div>
+
+            <div class="right-content">
+                <div class="photo-frame">
+                    <img src="me-portrait.jpg" alt="Azhad Portrait">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="cards-section">
+        
+        <div class="info-card">
+            <div class="card-details">
+                <div class="card-header">
+                    <div class="icon-circle">
+                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/></svg>
+                    </div>
+                    <h2>Personal hobbies</h2>
+                </div>
+                <p>
+                    When I'm not behind the editing, you'll find me pushing my limits outdoors and in the gym. I enjoy running and competing in races, climbing rocks, and strength training. Staying active keeps me energized and inspired, both in life and in my creative projects.
+                </p>
+            </div>
+            <img src="hobby-climbing.jpg" alt="Rock Climbing" class="img-climbing">
+        </div>
+
+        <div class="info-card">
+            <div class="card-details">
+                <div class="card-header">
+                    <div class="icon-circle">
+                         <svg width="20" height="20" viewBox="0 0 24 24" fill="red" stroke="none"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                    </div>
+                    <h2>Personal Project</h2>
+                </div>
+                <p>
+                    I run a YouTube channel as a fun side project where I dive into storytelling and video editing. I love crafting content that informs and entertains, experimenting with editing styles, and bringing ideas to life on screen—just for the thrill of creating.
+                </p>
+                <a href="https://www.youtube.com/@TheGuidedDeen1" target="_blank" class="link-channel">https://www.youtube.com/@TheGuidedDeen1</a>
+            </div>
+            
+            <a href="https://www.youtube.com/@TheGuidedDeen1" target="_blank" class="youtube-container">
+                <img src="yt-channel-preview.jpg" alt="Channel Preview" class="img-preview">
+                <img src="yt-pfp.png" alt="Channel PFP" class="img-pfp-overlay">
+            </a>
+        </div>
+
+    </section>
+
+</body>
+</html>

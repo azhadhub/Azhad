@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects & Skills - Azhad Al-Hadi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #080808;
+            --card-bg: #151515;
+            --text-white: #ffffff;
+            --accent-orange: #ff6b00;
+            --border-color: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: var(--text-white);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .scanline-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+            background-size: 100% 4px; pointer-events: none; z-index: 9999; opacity: 0.6;
+        }
+
+        .nav-bar { padding: 20px; position: fixed; top: 0; left: 0; z-index: 100; }
+        .btn-back { color: #fff; text-decoration: none; border: 1px solid #444; padding: 10px 20px; border-radius: 8px; background: #000; font-weight: 500; transition: 0.3s; }
+        .btn-back:hover { border-color: var(--accent-orange); color: var(--accent-orange); }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 100px 20px; }
+
+        .section-title { font-family: 'JetBrains Mono', monospace; font-size: 2em; margin-bottom: 40px; border-bottom: 2px solid var(--accent-orange); padding-bottom: 10px; display: inline-block; }
+        .section-title span { color: var(--accent-orange); }
+
+        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 100px; }
+        
+        .project-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 15px; overflow: hidden; transition: transform 0.3s;
+            display: flex; flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .project-card:hover { transform: translateY(-5px); border-color: var(--accent-orange); }
+
+        .project-visual {
+            height: 180px; background: #1a1a1a; display: flex; align-items: center; justify-content: center;
+            border-bottom: 1px solid #333; position: relative; overflow: hidden;
+        }
+        
+        .ui-window { width: 80%; height: 60%; background: #0a0a0a; border-radius: 8px; border: 1px solid #444; padding: 15px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .ui-dots { display: flex; gap: 5px; margin-bottom: 10px; }
+        .ui-dot { width: 8px; height: 8px; border-radius: 50%; background: #444; }
+        .ui-line { height: 6px; background: #333; border-radius: 3px; margin-bottom: 6px; width: 100%; }
+        .ui-line.short { width: 60%; }
+        .ui-line.accent { background: var(--accent-orange); width: 40%; }
+
+        .project-content { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+        .project-content h3 { font-size: 1.4em; margin-bottom: 10px; font-family: 'JetBrains Mono', monospace; }
+        .project-content p { color: #aaa; font-size: 0.95em; line-height: 1.6; margin-bottom: 20px; flex: 1; }
+        
+        .tech-tag {
+            display: inline-block; font-size: 0.8em; background: #000; color: var(--accent-orange);
+            padding: 4px 10px; border-radius: 4px; margin-right: 5px; border: 1px solid #333;
+        }
+
+        .toolbox-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+        .tool-box {
+            background: #1a1a1a; aspect-ratio: 1/1; border-radius: 12px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border: 1px solid #333; transition: 0.3s; cursor: default;
+        }
+        .tool-box:hover { background: #222; border-color: #555; transform: translateY(-5px); }
+        
+        .tool-icon { width: 40px; height: 40px; margin-bottom: 15px; object-fit: contain; }
+        .tool-name { font-size: 0.9em; color: #fff; font-weight: 500; }
+        
+        .skill-level { display: flex; gap: 3px; margin-top: 8px; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: #333; }
+        .dot.active { background: var(--accent-orange); box-shadow: 0 0 5px var(--accent-orange); }
+
+        .fill-orange { fill: var(--accent-orange); }
+        .fill-white { fill: #ffffff; }
+        .fill-blue { fill: #00bcd4; }
+        .fill-green { fill: #4caf50; }
+        .fill-purple { fill: #9c27b0; }
+
+        @media (max-width: 768px) {
+            .project-grid { grid-template-columns: 1fr; }
+            .toolbox-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="scanline-overlay"></div>
+    <nav class="nav-bar">
+        <a href="index.html" class="btn-back">← Home</a>
+    </nav>
+
+    <div class="container">
+        <h2 class="section-title"><span>01.</span> Selected Projects</h2>
+        
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="project-visual">
+                    <div class="ui-window">
+                        <div class="ui-dots"><div class="ui-dot" style="background:#ff5f56"></div><div class="ui-dot" style="background:#ffbd2e"></div></div>
+                        <div class="ui-line accent"></div>
+                        <div class="ui-line"></div>
+                        <div class="ui-line short"></div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Flight Booking System</h3>
+                    <p>A functional Java-based system allowing users to search, book, and manage flight tickets through a user-friendly interface.</p>
+                    <div class="tags">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">OOP</span>
+                        <span class="tech-tag">Algorithms</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-visual">
+                    <div class="ui-window">
+                        <div class="ui-dots"><div class="ui-dot" style="background:#ff5f56"></div><div class="ui-dot" style="background:#ffbd2e"></div></div>
+                        <div class="ui-line"></div>
+                        <div class="ui-line accent" style="width:30%; margin-left:auto;"></div>
+                        <div class="ui-line short"></div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Online Matchmaking Platform</h3>
+                    <p>Web-based dating platform featuring interactive profiles, a preference-based matching system, secure login, and integrated chat.</p>
+                    <div class="tags">
+                        <span class="tech-tag">Web Dev</span>
+                        <span class="tech-tag">Database</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title"><span>02.</span> My Toolbox</h2>
+        
+        <div class="toolbox-grid">
+            <div class="tool-box">
+                <svg class="tool-icon" viewBox="0 0 24 24"><path class="fill-orange" d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8 S16.41,20,12,20z"/><text x="8" y="16" fill="#fff" font-size="10" font-weight="bold">J</text></svg>
+                <div class="tool-name">Java</div>
+                <div class="skill-level"><div class="dot active"></div><div class="dot active"></div><div class="dot"></div></div>
+            </div>
+            <div class="tool-box">
+                <svg class="tool-icon" viewBox="0 0 24 24"><path class="fill-orange" d="M12,17.56l4.07-1.13l0.55-6.15H7.38l-0.1-1.12h11.4l0.1-1.12H6.16l0.32,3.36h9.91l-0.37,4.14l-4.02,1.11 l-4.02-1.11l-0.25-2.8H6.61l0.36,4.03L12,17.56z"/></svg>
+                <div class="tool-name">HTML</div>
+                <div class="skill-level"><div class="dot active"></div><div class="dot active"></div><div class="dot"></div></div>
+            </div>
+            <div class="tool-box">
+                <svg class="tool-icon" viewBox="0 0 24 24"><path class="fill-blue" d="M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M12,16l-3-4l3-4l3,4L12,16z"/></svg>
+                <div class="tool-name">PHP</div>
+                <div class="skill-level"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div></div>
+            </div>
+            <div class="tool-box">
+                <svg class="tool-icon" viewBox="0 0 24 24"><path class="fill-white" d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M6,10h12v4H6V10z"/></svg>
+                <div class="tool-name">MySQL</div>
+                <div class="skill-level"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div></div>
+            </div>
+            <div class="tool-box">
+                <img src="excell.png" alt="Excel" class="tool-icon">
+                <div class="tool-name">Excel</div>
+                <div class="skill-level"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div></div>
+            </div>
+            <div class="tool-box">
+                <img src="canva.png" alt="Canva" class="tool-icon">
+                <div class="tool-name">Canva</div>
+                <div class="skill-level"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div></div>
+            </div>
+            <div class="tool-box">
+                <img src="figma.png" alt="Figma" class="tool-icon">
+                <div class="tool-name">Figma</div>
+                <div class="skill-level"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div></div>
+            </div>
+            <div class="tool-box">
+                <svg class="tool-icon" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" class="fill-orange" opacity="0.8"/><text x="7" y="15" fill="#fff" font-size="8" font-weight="bold">X</text></svg>
+                <div class="tool-name">XAMPP</div>
+                <div class="skill-level"><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
