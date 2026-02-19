@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects & Skills - Azhad Al-Hadi</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&family=Caveat:wght@700&display=swap');
 
         :root {
             --bg-color: #080808;
@@ -45,15 +45,17 @@
         
         .project-card {
             background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 15px; overflow: hidden; transition: transform 0.3s;
-            display: flex; flex-direction: column;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border-radius: 15px; 
+            transition: transform 0.3s;
+            display: flex; flex-direction: column; position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-decoration: none; color: inherit;
         }
         .project-card:hover { transform: translateY(-5px); border-color: var(--accent-orange); }
 
         .project-visual {
             height: 180px; background: #1a1a1a; display: flex; align-items: center; justify-content: center;
             border-bottom: 1px solid #333; position: relative; overflow: hidden;
+            border-top-left-radius: 15px; border-top-right-radius: 15px;
         }
         
         .ui-window { width: 80%; height: 60%; background: #0a0a0a; border-radius: 8px; border: 1px solid #444; padding: 15px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
@@ -63,13 +65,46 @@
         .ui-line.short { width: 60%; }
         .ui-line.accent { background: var(--accent-orange); width: 40%; }
 
-        .project-content { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+        .project-content { 
+            padding: 25px; flex: 1; display: flex; flex-direction: column; 
+            border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;
+        }
         .project-content h3 { font-size: 1.4em; margin-bottom: 10px; font-family: 'JetBrains Mono', monospace; }
         .project-content p { color: #aaa; font-size: 0.95em; line-height: 1.6; margin-bottom: 20px; flex: 1; }
         
         .tech-tag {
             display: inline-block; font-size: 0.8em; background: #000; color: var(--accent-orange);
             padding: 4px 10px; border-radius: 4px; margin-right: 5px; border: 1px solid #333;
+        }
+
+        .click-me-container {
+            position: absolute; 
+            top: 20px; 
+            right: -120px; 
+            width: 100px;
+            z-index: 10;
+            display: flex; flex-direction: column; align-items: center;
+            animation: poke-left 1.5s infinite ease-in-out; 
+            pointer-events: none;
+        }
+        
+        .fun-text {
+            font-family: 'JetBrains Mono', monospace; 
+            font-weight: 800;
+            color: var(--accent-orange); 
+            font-size: 1.1em; 
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+        }
+
+        .arrow-icon {
+            width: 50px; height: 50px; fill: var(--accent-orange);
+            filter: drop-shadow(0 0 5px rgba(255,107,0,0.4));
+        }
+
+        @keyframes poke-left {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-10px); }
         }
 
         .toolbox-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
@@ -94,6 +129,20 @@
         .fill-green { fill: #4caf50; }
         .fill-purple { fill: #9c27b0; }
 
+        @media (max-width: 1100px) {
+            .click-me-container { 
+                top: -60px; 
+                right: 20px; 
+                flex-direction: column-reverse;
+                animation: poke-down 1.5s infinite ease-in-out;
+            }
+            .arrow-icon { transform: rotate(-90deg); }
+            @keyframes poke-down {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(10px); }
+            }
+        }
+
         @media (max-width: 768px) {
             .project-grid { grid-template-columns: 1fr; }
             .toolbox-grid { grid-template-columns: repeat(2, 1fr); }
@@ -110,6 +159,7 @@
         <h2 class="section-title"><span>01.</span> Selected Projects</h2>
         
         <div class="project-grid">
+            
             <div class="project-card">
                 <div class="project-visual">
                     <div class="ui-window">
@@ -130,7 +180,13 @@
                 </div>
             </div>
 
-            <div class="project-card">
+            <a href="matchmaking-video.html" class="project-card">
+                
+                <div class="click-me-container">
+                    <span class="fun-text">CLICK ME</span>
+                    <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M20,11H7.83l5.59-5.59L12,4l-8,8l8,8l1.41-1.41L7.83,13H20V11z"/></svg>
+                </div>
+
                 <div class="project-visual">
                     <div class="ui-window">
                         <div class="ui-dots"><div class="ui-dot" style="background:#ff5f56"></div><div class="ui-dot" style="background:#ffbd2e"></div></div>
@@ -147,7 +203,7 @@
                         <span class="tech-tag">Database</span>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <h2 class="section-title"><span>02.</span> My Toolbox</h2>
