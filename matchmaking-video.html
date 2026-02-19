@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matchmaking Demo - Azhad Al-Hadi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #080808;
+            --text-white: #ffffff;
+            --accent-orange: #ff6b00;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: var(--text-white);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+
+        .scanline-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+            background-size: 100% 4px; pointer-events: none; z-index: 9999; opacity: 0.6;
+        }
+
+        .nav-bar { position: fixed; top: 20px; left: 20px; z-index: 100; }
+        .btn-back { color: #fff; text-decoration: none; border: 1px solid #444; padding: 10px 20px; border-radius: 8px; background: #000; font-weight: 500; transition: 0.3s; }
+        .btn-back:hover { border-color: var(--accent-orange); color: var(--accent-orange); }
+
+        .video-container {
+            width: 90%; max-width: 1000px;
+            background: #151515; padding: 20px; border-radius: 15px;
+            border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'JetBrains Mono', monospace; font-size: 1.8em; margin-bottom: 20px;
+        }
+        h1 span { color: var(--accent-orange); }
+
+        video {
+            width: 100%; border-radius: 10px; border: 1px solid #444;
+            max-height: 70vh; background: #000;
+        }
+
+        .video-controls-hint {
+            margin-top: 15px; color: #666; font-size: 0.9em;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="scanline-overlay"></div>
+    <nav class="nav-bar">
+        <a href="projects.html" class="btn-back">← Back to Projects</a>
+    </nav>
+
+    <div class="video-container">
+        <h1>Project Demo: <span>Matchmaking App</span></h1>
+        
+        <!-- VIDEO PLAYER -->
+        <video controls autoplay>
+            <source src="dating-app-demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <p class="video-controls-hint">Click the icon in the bottom right to go Full Screen</p>
+    </div>
+</body>
+</html>
